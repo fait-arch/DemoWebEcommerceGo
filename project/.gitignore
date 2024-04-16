@@ -63,8 +63,10 @@ node_modules/
 .yarn-integrity
 
 # dotenv environment variables file
+pub
 .env
 
 # Ignorar archivo KEY.json en la ruta especificada
 KioskPay/KEY.json
 KioskPay/db/pb_data/storage/
+project/server/.env
