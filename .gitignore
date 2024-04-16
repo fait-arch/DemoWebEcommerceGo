@@ -11,4 +11,4 @@ node_modules/
 # Optional npm cache directory
 .npm
 # Ignorar archivo .env en la ruta especificada
-Web/DemoWebAppPproperties/project/server/.env
+project/server/.env
