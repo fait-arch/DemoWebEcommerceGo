@@ -10,10 +10,10 @@ import (
 
 func main() {
 	// Configura los detalles de conexión
-	dbUser := "u114736770_faitarch"						//tu_usuario
-	dbPass := "Star3rjNb1."					//tu_contraseña
-	dbHost := "89.117.139.1:3306"	//servidor_de_base_de_datos:3306
-	dbName := "u114736770_prueba_001"		//nombre_de_la_base_de_datos
+	dbUser := ""						//tu_usuario
+	dbPass := ""					//tu_contraseña
+	dbHost := ""	//servidor_de_base_de_datos:3306
+	dbName := ""		//nombre_de_la_base_de_datos
 
 	// Crea la cadena de conexión
 	connStr := fmt.Sprintf("%s:%s@tcp(%s)/%s", dbUser, dbPass, dbHost, dbName)

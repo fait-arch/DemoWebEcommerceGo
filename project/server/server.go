@@ -12,7 +12,7 @@ func main() {
     // Initialize default config
 	app.Use(logger.New())
 	
-	app.Static("", "../public/dist") 
+	app.Static("", "../client/dist") 
 
 	app.Get("/users", func(c fiber.Ctx) error {
 		return c.JSON(&fiber.Map{
