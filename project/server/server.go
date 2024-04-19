@@ -1,13 +1,18 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/cors"
 	"github.com/gofiber/fiber/v3/middleware/logger"
 )
 
 func main() {
-    app := fiber.New()
+	fmt.Print("dd")
+
+	
+	app := fiber.New()
     app.Use(cors.New())
     // Initialize default config
 	app.Use(logger.New())
@@ -20,6 +25,7 @@ func main() {
 		})
 	})
 
+	fmt.Print("dd")
 
     app.Listen(":3000")
 }

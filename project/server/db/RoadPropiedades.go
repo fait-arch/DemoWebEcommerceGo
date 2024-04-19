@@ -1,4 +1,3 @@
-// RoadPropiedades.go
 package RoadPropiedades
 
 import (
