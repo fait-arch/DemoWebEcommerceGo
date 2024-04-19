@@ -4,7 +4,10 @@ go 1.22.0
 
 require github.com/gofiber/fiber/v2 v2.52.4
 
-require github.com/gofiber/utils/v2 v2.0.0-beta.4 // indirect
+require (
+	github.com/gofiber/utils/v2 v2.0.0-beta.4 // indirect
+	github.com/joho/godotenv v1.5.1 // indirect
+)
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
