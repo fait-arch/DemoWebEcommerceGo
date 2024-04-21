@@ -3,7 +3,11 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
-	{ name: "Dashboard", href: "#", current: true },
+	{
+		name: "Productos",
+		href: "http://localhost:5173/allProductsPage",
+		current: true,
+	},
 	//{ name: "Team", href: "#", current: false },
 	//{ name: "Projects", href: "#", current: false },
 	//{ name: "Calendar", href: "#", current: false },
@@ -42,13 +46,15 @@ export default function Example() {
 							</div>
 							<div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 								<div className="flex flex-shrink-0 items-center">
-									<img
-										className="h-8 w-auto"
-										src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-										alt="Your Company"
-										href="https://demo.grupoevra.com/"
-									/>
+									<a href="http://localhost:5173">
+										<img
+											className="h-8 w-auto"
+											src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+											alt="Your Company"
+										/>
+									</a>
 								</div>
+
 								<div className="hidden sm:ml-6 sm:block">
 									<div className="flex space-x-4">
 										{navigation.map((item) => (
@@ -98,7 +104,7 @@ export default function Example() {
 											</span>
 											<img
 												className="h-8 w-8 rounded-full"
-												src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+												src="https://i.pinimg.com/564x/ac/04/c1/ac04c1a92c662162c4cf457bf77e7bf8.jpg"
 												alt=""
 											/>
 										</Menu.Button>
