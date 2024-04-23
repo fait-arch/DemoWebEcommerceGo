@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	db "db"
+	dbRoadProduct "RoadProduct"
+	dbRoadPropiedades "RoadPropiedades"
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/cors"
@@ -21,13 +22,25 @@ func main() {
     // Ruta para manejar la solicitud y devolver el JSON de propiedades
     app.Get("/propiedades", func(c fiber.Ctx) error {
         // Llama a la función ObtenerPropiedades para obtener el JSON de propiedades
-        propiedadesJSON, err := db.ObtenerPropiedades()
+        propiedadesJSON, err := dbRoadPropiedades.ObtenerPropiedades()
         if err != nil {
             log.Printf("Error al obtener propiedades: %v", err)
             return c.Status(fiber.StatusInternalServerError).SendString("Error al obtener propiedades")
         }
         // Devuelve el JSON como respuesta
         return c.JSON(propiedadesJSON)
+    })
+
+    // Ruta para manejar la solicitud y devolver el JSON de productos
+    app.Get("/product", func(c fiber.Ctx) error {
+        // Llama a la función ObtenerPropiedades para obtener el JSON de productos
+        productJSON, err := dbRoadProduct.ObtenerProduct()
+        if err != nil {
+            log.Printf("Error al obtener propiedades: %v", err)
+            return c.Status(fiber.StatusInternalServerError).SendString("Error al obtener propiedades")
+        }
+        // Devuelve el JSON como respuesta
+        return c.JSON(productJSON)
     })
 
     // Lanza el servidor Fiber

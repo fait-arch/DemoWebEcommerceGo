@@ -1,4 +1,4 @@
-module db
+module RoadPropiedades
 
 go 1.22.2
 
