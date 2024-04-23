@@ -8,21 +8,27 @@ const products = [
 		description: "36EU - 4US",
 		price: 1259.0,
 		image: "https://images.unsplash.com/photo-1588484628369-dd7a85bfdc38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHNuZWFrZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=150&q=60",
+		quantity: 10,
 	},
 	{
-		id: 2,
-		name: "Product 2",
-		description: "Description of Product 2",
-		price: 1000.0,
-		image: "https://i.pinimg.com/564x/71/5e/94/715e943539b1caa889f39bfc1a36f4aa.jpg",
+		id: 5,
+		name: "Nike Air Max 2019",
+		href: "/paymentGateway",
+		description: "36EU - 4US",
+		price: 35.0,
+		image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
+		imageAlt: "Front of men's Basic Tee in black.",
+		color: "Black",
+		quantity: 10,
 	},
+
 	// Add more products as needed
 ];
 
 function Cart() {
 	const [cartProducts, setCartProducts] = useState(products);
 	const [subtotal, setSubtotal] = useState(
-		products.reduce((acc, curr) => acc + curr.price, 0)
+		products.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
 	);
 	const [total, setTotal] = useState(subtotal);
 
@@ -34,12 +40,33 @@ function Cart() {
 		setTotal(total - price);
 	};
 
+	const handleQuantityChange = (productId, newQuantity) => {
+		const updatedProducts = cartProducts.map((product) => {
+			if (product.id === productId) {
+				return {
+					...product,
+					quantity: newQuantity,
+				};
+			}
+			return product;
+		});
+
+		setCartProducts(updatedProducts);
+
+		const newSubtotal = updatedProducts.reduce(
+			(acc, curr) => acc + curr.price * curr.quantity,
+			0
+		);
+		setSubtotal(newSubtotal);
+		setTotal(newSubtotal);
+	};
+
 	return (
-		<section className="h-screen bg-gray-100 py-12 sm:py-16 lg:py-20">
+		<section className="h-screen bg-gray-100 py-12 sm:py-16 lg:py-7">
 			<div className="mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-center">
 					<h1 className="text-2xl font-semibold text-gray-900">
-						Your Cart
+						Carrito de Compra
 					</h1>
 				</div>
 
@@ -56,7 +83,7 @@ function Cart() {
 										>
 											<div className="shrink-0 relative">
 												<span className="absolute top-1 left-1 flex h-6 w-6 items-center justify-center rounded-full border bg-white text-sm font-medium text-gray-500 shadow sm:-top-2 sm:-right-2">
-													1
+													{product.quantity}
 												</span>
 												<img
 													className="h-24 w-24 max-w-full rounded-lg object-cover"
@@ -76,6 +103,31 @@ function Cart() {
 																product.description
 															}
 														</p>
+														<div className="flex items-center">
+															<label
+																htmlFor={`quantity_${product.id}`}
+																className="mr-2"
+															></label>
+															<input
+																type="number"
+																id={`quantity_${product.id}`}
+																value={
+																	product.quantity
+																}
+																min={1}
+																onChange={(e) =>
+																	handleQuantityChange(
+																		product.id,
+																		parseInt(
+																			e
+																				.target
+																				.value
+																		)
+																	)
+																}
+																className="border border-gray-300 rounded-md px-3 py-1 w-16 focus:outline-none focus:border-gray-500"
+															/>
+														</div>
 													</div>
 
 													<div className="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
@@ -95,7 +147,8 @@ function Cart() {
 														onClick={() =>
 															handleRemoveItem(
 																product.id,
-																product.price
+																product.price *
+																	product.quantity
 															)
 														}
 													>
@@ -148,9 +201,9 @@ function Cart() {
 							<div className="mt-6 text-center">
 								<button
 									type="button"
-									className="group inline-flex w-full items-center justify-center rounded-md bg-orange-500 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800"
+									className="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-200 hover:text-gray-900"
 								>
-									Place Order
+									Pagar
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										className="group-hover:ml-8 ml-4 h-6 w-6 transition-all"

@@ -1,6 +1,8 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 const navigation = [
 	{
@@ -18,6 +20,13 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+	const [cartItemsCount, setCartItemsCount] = useState(5); // Variable para almacenar la cantidad de productos en el carrito
+
+	// Función para actualizar la cantidad de productos en el carrito
+	const updateCartItemsCount = (count) => {
+		setCartItemsCount(count);
+	};
+
 	return (
 		<Disclosure as="nav" className="bg-gray-900">
 			{({ open }) => (
@@ -80,20 +89,28 @@ export default function Example() {
 								</div>
 							</div>
 							<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-								<button
-									type="button"
-									className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-								>
-									<span className="absolute -inset-1.5" />
-									<span className="sr-only">
-										View notifications
-									</span>
-									<BellIcon
-										className="h-6 w-6"
-										aria-hidden="true"
-									/>
-								</button>
-
+								<a href="/paymentGateway">
+									<button
+										type="button"
+										className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+									>
+										<span className="absolute -inset-1.5" />
+										<span className="sr-only">
+											View cart
+										</span>
+										<FontAwesomeIcon
+											icon={faShoppingCart}
+											className="h-6 w-5"
+											aria-hidden="true"
+										/>
+										{/* Notificación de cantidad de productos en el carrito */}
+										{cartItemsCount > 0 && (
+											<span className="absolute top-0 right-0 bg-red-500 rounded-full text-white px-1 py-0 text-xs">
+												{cartItemsCount}
+											</span>
+										)}
+									</button>
+								</a>
 								{/* Profile dropdown */}
 								<Menu as="div" className="relative ml-3">
 									<div>
