@@ -2,7 +2,6 @@ package RoadPropiedades
 
 import (
 	"database/sql"
-	"encoding/json"
 	"fmt"
 	"os"
 
@@ -16,12 +15,12 @@ type Propiedad struct {
 	Tipo        string `json:"tipo"`
 }
 
-// ObtenerPropiedadesString realiza la consulta a la base de datos y devuelve los resultados en formato JSON como un string
-func ObtenerPropiedades() (string, error) {
+// ObtenerPropiedades realiza la consulta a la base de datos y devuelve los resultados como un slice de Propiedad
+func ObtenerPropiedades() ([]Propiedad, error) {
 	// Cargar variables de entorno desde el archivo .env
 	err := godotenv.Load()
 	if err != nil {
-		return "", fmt.Errorf("error al cargar el archivo .env: %w", err)
+		return nil, fmt.Errorf("error al cargar el archivo .env: %w", err)
 	}
 
 	// Obtener las credenciales de la base de datos desde las variables de entorno
@@ -36,14 +35,14 @@ func ObtenerPropiedades() (string, error) {
 	// Conéctate a la base de datos
 	db, err := sql.Open("mysql", connStr)
 	if err != nil {
-		return "", fmt.Errorf("error al conectar a la base de datos: %w", err)
+		return nil, fmt.Errorf("error al conectar a la base de datos: %w", err)
 	}
 	defer db.Close()
 
 	// Consulta en la base de datos
 	rows, err := db.Query("SELECT PropiedadID, Tipo FROM Propiedades")
 	if err != nil {
-		return "", fmt.Errorf("error al ejecutar la consulta: %w", err)
+		return nil, fmt.Errorf("error al ejecutar la consulta: %w", err)
 	}
 	defer rows.Close()
 
@@ -54,19 +53,12 @@ func ObtenerPropiedades() (string, error) {
 	for rows.Next() {
 		var propiedad Propiedad
 		if err := rows.Scan(&propiedad.PropiedadID, &propiedad.Tipo); err != nil {
-			return "", fmt.Errorf("error al escanear fila: %w", err)
+			return nil, fmt.Errorf("error al escanear fila: %w", err)
 		}
 		propiedades = append(propiedades, propiedad)
 	}
 
-	// Convertir el slice de propiedades a formato JSON como string
-	propiedadesJSON, err := json.Marshal(propiedades)
-	if err != nil {
-		return "", fmt.Errorf("error al convertir a JSON: %w", err)
-	}
-
-	// Convertir el JSON byte slice a string
-	propiedadesString := string(propiedadesJSON)
-
-	return propiedadesString, nil
+	return propiedades, nil
 }
+
+

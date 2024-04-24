@@ -27,6 +27,7 @@ func main() {
             log.Printf("Error al obtener propiedades: %v", err)
             return c.Status(fiber.StatusInternalServerError).SendString("Error al obtener propiedades")
         }
+        fmt.Printf("El tipo de dato de productos es: %T\n", propiedadesJSON)
         // Devuelve el JSON como respuesta
         return c.JSON(propiedadesJSON)
     })
@@ -39,6 +40,9 @@ func main() {
             log.Printf("Error al obtener propiedades: %v", err)
             return c.Status(fiber.StatusInternalServerError).SendString("Error al obtener propiedades")
         }
+
+        fmt.Printf("El tipo de dato de productos es: %T\n", productJSON)
+
         // Devuelve el JSON como respuesta
         return c.JSON(productJSON)
     })

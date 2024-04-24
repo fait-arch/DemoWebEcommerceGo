@@ -1,4 +1,4 @@
-import MenuBar from "../homePage/menuBar";
+import MenuBar from "../homePage/menuBar.tsx";
 import Login from "./login";
 
 export default function App() {

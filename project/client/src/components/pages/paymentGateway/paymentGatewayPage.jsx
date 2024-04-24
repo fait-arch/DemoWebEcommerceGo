@@ -1,5 +1,5 @@
-import MenuBar from "../homePage/menuBar.jsx";
-import CartItems from "./cartItems.jsx";
+import MenuBar from "../homePage/menuBar.tsx";
+import CartItems from "./cartItems.tsx";
 
 export default function App() {
 	return (
