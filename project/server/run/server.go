@@ -6,8 +6,9 @@ import (
 
 	dbRoadProduct "RoadProduct"
 	dbRoadPropiedades "RoadPropiedades"
+	whereProduct "whereProduct"
 
-	WritingCart "WritingCart" // Importa el paquete WritingCart
+	WritingCart "WritingCart"
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/cors"
@@ -34,6 +35,24 @@ func main() {
         // Devuelve el contenido del carrito como respuesta en formato JSON
         return c.JSON(cartIDs)
     })
+
+        // Agrega un nuevo endpoint para obtener el contenido del productos segun el ID
+    app.Get("/productID", func(c fiber.Ctx) error {
+        // Obtener los IDs del carrito de compras
+        cartIDs := WritingCart.GetCartIDs()
+
+        // Llama a la función ObtenerProductosPorIDs para obtener los productos por esos IDs
+        productIDJSON, err := whereProduct.ObtenerProductosPorIDs(cartIDs)
+        if err != nil {
+            log.Printf("Error al obtener productos: %v", err)
+            return c.Status(fiber.StatusInternalServerError).SendString("Error al obtener productos")
+        }
+        fmt.Printf("El tipo de dato de productos es: %T\n", productIDJSON)
+        // Devuelve el JSON como respuesta
+        return c.JSON(productIDJSON)
+    })
+
+
 
     // Ruta para manejar la solicitud y devolver el JSON de propiedades
     app.Get("/propiedades", func(c fiber.Ctx) error {

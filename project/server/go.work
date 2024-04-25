@@ -4,5 +4,6 @@ use (
 	./db/RoadProduct
 	./db/RoadPropiedades
 	./db/WritingCart
+	./db/whereProduct
 	./run
 )

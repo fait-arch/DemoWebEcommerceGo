@@ -15,7 +15,7 @@ function Cart() {
 	const [total, setTotal] = useState<number>(0);
 
 	useEffect(() => {
-		fetch("http://127.0.0.1:3000/product")
+		fetch("http://127.0.0.1:3000/productID")
 			.then((response) => response.json())
 			.then((data) => {
 				// Mapear los datos de la API al formato de productos
