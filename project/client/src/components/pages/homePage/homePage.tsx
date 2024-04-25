@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Banner from "./banner.tsx";
 import MenuBar from "./menuBar.tsx";
-import ProductList from "./productListing.tsx";
-import SelectedProductIds from "./selectedProductIDs.tsx"; // Importa el nuevo componente
+import ProductListing from "./ProductList.tsx";
 
 export default function App(): JSX.Element {
 	// Supongamos que aquí tienes una lista de IDs de productos seleccionados
@@ -12,9 +11,7 @@ export default function App(): JSX.Element {
 		<div>
 			<MenuBar />
 			<Banner />
-			<ProductList />
-			{/* Renderiza el componente SelectedProductIds y pasa la lista de IDs seleccionados como prop */}
-			<SelectedProductIds selectedIds={selectedProductIds} />
+			<ProductListing />
 		</div>
 	);
 }

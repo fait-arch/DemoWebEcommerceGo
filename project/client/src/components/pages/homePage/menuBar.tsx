@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { getSelectedProductIds } from "./ProductList"; // Importamos la función getSelectedProductIds
 
 const navigation = [
 	{
@@ -107,7 +108,12 @@ const MenuBar: React.FC = () => {
 										/>
 										{/* Notificación de cantidad de productos en el carrito */}
 										<span className="absolute top-0 right-0 bg-red-500 rounded-full text-white px-1 py-0 text-xs">
-											{cartItems.length}
+											{/* Aquí cambiamos la longitud de cartItems por el número de IDs */}
+											{
+												getSelectedProductIds(
+													cartItems
+												).split(",").length
+											}
 										</span>
 									</button>
 								</a>
