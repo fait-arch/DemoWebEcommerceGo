@@ -3,8 +3,10 @@ Ejecuta estos comandos en la terminal en orden
 
 | COMANDO            | EXPLICACON                                                                                | RUTA DE EJECUCION |
 | ------------------ | ----------------------------------------------------------------------------------------- | ----------------- |
+| `npm init`         | Esto descargara las dependencias de nodejs                                                |                   |
 | `npm install`      | Instalar dependecias de nodejs                                                            |                   |
 | `npm run build`    | Construir la aplicación de JavaScript para producción que leerá el server en go.          |                   |
+| `npm run dev`      | Ejecuta el código de React en un puerto local                                             |                   |
 | `go run server.go` | Correr servidor "server.go" local en el puerto :3000                                      |                   |
 | `air`              | Correr servidor "server.go" y se actualiza en tiempo real los cambios en el puerto :3000. |                   |
 | `npm run dev`      | Correr servidor local en el puerto :5137 con el motor de ejecución de nodejs              |                   |
@@ -13,9 +15,13 @@ Ejecuta estos comandos en la terminal en orden
 - Vite
 - React
 - nodejs
-- Go
+-  [Goroutines](https://go.dev/tour/concurrency/1)
 - MySQL
-- FireBase
+
+### Lenguajes de Programación  
+- TypeScript
+- JavaScript
+- Go
 
 ### Librería de apoyo
 - [Tailwind]()
