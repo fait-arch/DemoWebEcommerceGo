@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,6 +26,11 @@ const MenuBar: React.FC = () => {
 			setCartItems([...cartItems, productId]); // Agregar solo si el ID no está en la lista
 		}
 	};
+
+	useEffect(() => {
+		// Forzar una actualización del componente cada vez que cambia cartItems
+		console.log("Cart items changed, triggering re-render");
+	}, [cartItems]);
 
 	return (
 		<Disclosure as="nav" className="bg-gray-900">

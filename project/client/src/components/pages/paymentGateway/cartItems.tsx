@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface Product {
 	id: number;
@@ -9,34 +9,36 @@ interface Product {
 	quantity: number;
 }
 
-// Definimos un objeto JSON que contiene los detalles del producto
-const products: Product[] = [
-	{
-		id: 1,
-		name: "Nike Air Max 2019",
-		description: "36EU - 4US",
-		price: 1259.0,
-		image: "https://images.unsplash.com/photo-1588484628369-dd7a85bfdc38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHNuZWFrZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=150&q=60",
-		quantity: 10,
-	},
-	{
-		id: 5,
-		name: "Nike Air Max 2019",
-		description: "36EU - 4US",
-		price: 35.0,
-		image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-		quantity: 10,
-	},
-
-	// Add more products as needed
-];
-
 function Cart() {
-	const [cartProducts, setCartProducts] = useState<Product[]>(products);
-	const [subtotal, setSubtotal] = useState<number>(
-		products.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
-	);
-	const [total, setTotal] = useState<number>(subtotal);
+	const [cartProducts, setCartProducts] = useState<Product[]>([]);
+	const [subtotal, setSubtotal] = useState<number>(0);
+	const [total, setTotal] = useState<number>(0);
+
+	useEffect(() => {
+		fetch("http://127.0.0.1:3000/product")
+			.then((response) => response.json())
+			.then((data) => {
+				// Mapear los datos de la API al formato de productos
+				const productsFromAPI: Product[] = data.map((item: any) => ({
+					id: item.id,
+					name: item.name,
+					description: item.description,
+					price: item.price,
+					image: item.imageSrc,
+					quantity: item.quantity,
+				}));
+				setCartProducts(productsFromAPI);
+
+				// Calcular el subtotal y el total
+				const newSubtotal = productsFromAPI.reduce(
+					(acc, curr) => acc + curr.price * curr.quantity,
+					0
+				);
+				setSubtotal(newSubtotal);
+				setTotal(newSubtotal);
+			})
+			.catch((error) => console.error("Error fetching products:", error));
+	}, []);
 
 	const handleRemoveItem = (productId: number, price: number) => {
 		setCartProducts(

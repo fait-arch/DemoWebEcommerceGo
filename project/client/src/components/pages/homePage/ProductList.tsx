@@ -40,7 +40,7 @@ const ProductList: React.FC = () => {
 
 	const sendIdsToServer = () => {
 		const idsString = selectedProductIds.join(",");
-		fetch("http://localhost:3000/addToCart", {
+		fetch("http://localhost:3000/addrocart", {
 			method: "POST",
 			headers: {
 				"Content-Type": "text/plain",

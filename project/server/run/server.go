@@ -7,7 +7,7 @@ import (
 	dbRoadProduct "RoadProduct"
 	dbRoadPropiedades "RoadPropiedades"
 
-	//WritingCart "WritingCart" // Importa el paquete WritingCart
+	WritingCart "WritingCart" // Importa el paquete WritingCart
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/cors"
@@ -20,8 +20,20 @@ func main() {
     app.Use(cors.New())
     app.Use(logger.New())
 
-    // Ruta POST para guardar un string
-    //app.Post("/cart", WritingCart.SaveToCart) // Asigna el handler SaveToCart para la ruta POST /cart
+	// Ruta POST para guardar un string
+	app.Post("/addrocart", WritingCart.AddToCartHandler) // Asigna el handler AddToCartHandler para la ruta POST /cart
+    app.Post("/clearcart", WritingCart.ClearCartHandler)
+    
+
+    // Agrega un nuevo endpoint para obtener el contenido del carrito
+    app.Get("/getCartContent", func(c fiber.Ctx) error {
+        // Obtén el contenido del carrito desde WritingCart
+        cartIDs := WritingCart.GetCartIDs()
+        fmt.Printf("El tipo de dato de cartIDs es: %T\n", cartIDs)
+
+        // Devuelve el contenido del carrito como respuesta en formato JSON
+        return c.JSON(cartIDs)
+    })
 
     // Ruta para manejar la solicitud y devolver el JSON de propiedades
     app.Get("/propiedades", func(c fiber.Ctx) error {
