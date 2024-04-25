@@ -69,6 +69,19 @@ function Cart() {
 		setTotal(newSubtotal);
 	};
 
+	const handlePay = () => {
+		fetch("http://localhost:3000/clearcart", {
+			method: "POST",
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				// Hacer algo con la respuesta si es necesario
+				console.log("Carrito limpiado exitosamente");
+			})
+			.catch((error) =>
+				console.error("Error al limpiar el carrito:", error)
+			);
+	};
 	return (
 		<section className="h-screen bg-gray-100 py-12 sm:py-16 lg:py-7">
 			<div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -207,8 +220,13 @@ function Cart() {
 
 							{/* Botón de realizar pedido */}
 							<div className="mt-6 text-center">
-								<button
-									type="button"
+								<a
+									onClick={(e) => {
+										e.preventDefault(); // Previene la acción predeterminada del enlace
+										handlePay(); // Llama a la función handlePay para limpiar el carrito
+										window.location.href =
+											"http://localhost:5173/";
+									}}
 									className="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-200 hover:text-gray-900"
 								>
 									Pagar
@@ -226,7 +244,7 @@ function Cart() {
 											d="M13 7l5 5m0 0l-5 5m5-5H6"
 										/>
 									</svg>
-								</button>
+								</a>
 							</div>
 						</div>
 					</div>
