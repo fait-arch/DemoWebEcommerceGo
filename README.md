@@ -1,5 +1,6 @@
 
-![[Captura de pantalla 2024-04-25 121115.png]]
+![](./documentation/img/pague.png)
+
 ## Levantar Componentes de React
 Dirección cd DemoWebEcommerceGo/project/client
  - npm install
@@ -20,16 +21,11 @@ Dirección : cd DemoWebEcommerceGo/project/server/run
 
 
 ## Componente (banner)
-
-
-![[Pasted image 20240425121705.png]]
-
-
+![](./documentation/img/banner.png)
 
 ## Componente (productList.tsx)
+![](./documentation/img/productList.png)
 
-![productList.tsx](./documentation/img/Captura de pantalla 2024-04-25 121348.png)
-![[Captura de pantalla 2024-04-25 121348.png]]
 ## Componente (cartItems.tsx)
 
-![[Pasted image 20240425121719.png]]
+![cartItems.jpg](./documentation/img/cartItems.png)

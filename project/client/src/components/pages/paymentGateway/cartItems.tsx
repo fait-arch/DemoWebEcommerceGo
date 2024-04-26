@@ -15,7 +15,7 @@ function Cart() {
 	const [total, setTotal] = useState<number>(0);
 
 	useEffect(() => {
-		fetch("http://127.0.0.1:3000/product")
+		fetch("http://127.0.0.1:3000/productID")
 			.then((response) => response.json())
 			.then((data) => {
 				// Mapear los datos de la API al formato de productos
@@ -70,6 +70,7 @@ function Cart() {
 	};
 
 	const handlePayment = () => {
+		// Llamar a la API para limpiar el carrito
 		fetch("http://127.0.0.1:3000/clearcart", {
 			method: "POST",
 		})
@@ -79,6 +80,8 @@ function Cart() {
 					setCartProducts([]);
 					setSubtotal(0);
 					setTotal(0);
+					// Redireccionar a la página deseada
+					window.location.href = "http://localhost:5173/";
 				} else {
 					throw new Error("Error al limpiar el carrito");
 				}
