@@ -48,7 +48,6 @@ func main() {
     return c.JSON(cartIDs)
 })
 
-
     // Agrega un nuevo endpoint para obtener el contenido del productos segun el ID
     app.Get("/productID", func(c fiber.Ctx) error {
         // Obtener los IDs del carrito de compras de manera concurrente
@@ -97,8 +96,6 @@ func main() {
         // Devuelve el JSON como respuesta
         return c.JSON(productIDJSON)
     })
-
-
 
     // Ruta para manejar la solicitud y devolver el JSON de propiedades
     app.Get("/propiedades", func(c fiber.Ctx) error {
